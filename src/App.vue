@@ -1,14 +1,10 @@
 <template>
   <div id="app">
-    <b-container>
       <b-nav tabs>
         <b-nav-item exact to="/">Home</b-nav-item>
         <b-nav-item exact to="/about">About</b-nav-item>
       </b-nav>
-      <b-row class="mt-5">
         <router-view/>
-      </b-row>
-    </b-container>
   </div>
 </template>
 
