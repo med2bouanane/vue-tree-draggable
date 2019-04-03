@@ -10,39 +10,79 @@
         </div>
         <button type="button" class="btn btn-default" @click="orderList">Sort by original order</button>
       </div>
-    </div> -->
-<div class="row">
-    <div class="col-md-3">
-      <draggable class="list-group" tag="ul" v-model="list" v-bind="dragOptions" :move="onMove" @start="isDragging=true" @end="isDragging=false">
-        <transition-group type="transition" :name="'flip-list'">
-          <li class="list-group-item" v-for="element in list" :key="element.order">
-            <i :class="element.fixed? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'" @click=" element.fixed=! element.fixed" aria-hidden="true"></i>
-            {{element.name}}
-            <span class="badge">{{element.order}}</span>
-          </li>
-        </transition-group>
-      </draggable>
-    </div>
+    </div>-->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+          <div class="card-header text-white bg-primary">
+            <b>List-1</b>
+          </div>
+          <div class="card-body">
+            <draggable
+              class="list-group overflow "
+              tag="ul"
+              :value="list"
+              v-bind="dragOptions"
+              :move="onMove"
+              @start="isDragging=true"
+              @end="isDragging=false"
+            >
+              <transition-group type="transition" :name="'flip-list'">
+                <li
+                  class="list-group-item shadow-lg p-3 bg-white rounded"
+                  v-for="element in list"
+                  :key="element.order"
+                >
+                  <i
+                    :class="element.fixed? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'"
+                    @click=" element.fixed=! element.fixed"
+                    aria-hidden="true"
+                  ></i>
+                  {{element.name}}
+                  <span
+                    class="badge badge-secondary"
+                  >{{element.order}}</span>
+                </li>
+              </transition-group>
+            </draggable>
+          </div>
+        </div>
+      </div>
 
-    <div class="col-md-3">
-      <draggable element="span" v-model="list2" v-bind="dragOptions" :move="onMove">
-        <transition-group name="no" class="list-group" tag="ul">
-          <li class="list-group-item" v-for="element in list2" :key="element.order">
-            <i :class="element.fixed? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'" @click=" element.fixed=! element.fixed" aria-hidden="true"></i>
-            {{element.name}}
-            <span class="badge">{{element.order}}</span>
-          </li>
-        </transition-group>
-      </draggable>
-    </div>
+      <div class="col-md-6">
+        <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+          <div class="card-header text-white bg-primary">
+            <b>List-2</b>
+          </div>
+          <div class="card-body">
+            <draggable element="span" :value="list2" v-bind="dragOptions" :move="onMove">
+              <transition-group name="no" class="list-group" tag="ul">
+                <li
+                  class="list-group-item shadow-lg p-3 bg-white rounded"
+                  v-for="element in list2"
+                  :key="element.order"
+                >
+                  <i
+                    :class="element.fixed? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'"
+                    @click=" element.fixed=! element.fixed"
+                    aria-hidden="true"
+                  ></i>
+                  {{element.name}}
+                  <span class="badge">{{element.order}}</span>
+                </li>
+              </transition-group>
+            </draggable>
+          </div>
+        </div>
+      </div>
 
-    <!-- <div class="list-group col-md-3">
+      <!-- <div class="list-group col-md-3">
       <pre>{{listString}}</pre>
     </div>
     <div class="list-group col-md-3">
       <pre>{{list2String}}</pre>
-    </div> -->
-</div>
+      </div>-->
+    </div>
   </div>
 </template>
 
@@ -97,7 +137,7 @@ export default {
     }
   },
   computed: {
-    ...mapState("entitiesList", ["list","list2"]),
+    ...mapState("entitiesList", ["list", "list2"]),
     dragOptions() {
       return {
         animation: 0,
@@ -143,6 +183,13 @@ export default {
 }
 .list-group-item {
   cursor: move;
+  margin-bottom: 10px !important;
+  border-left: 5px solid #66BB6A !important;
+  /**/
+}
+.list-group-item:hover {
+  opacity: 0.7;
+  background-color: #FAFAFA !important; 
 }
 .list-group-item i {
   cursor: pointer;
