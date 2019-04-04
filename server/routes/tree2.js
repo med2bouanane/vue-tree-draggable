@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const tree = require('../models/tree');
+const tree = require('../models/tree2');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {

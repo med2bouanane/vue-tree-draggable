@@ -8,16 +8,31 @@
           </div>
           <div class="card-body">
             <draggable
-              class="list-group"
-              :list="list" group="my-group" @change="log">
-                <div class="list-group-item shadow-lg p-3 bg-white rounded"
+              class="list-group overflow "
+              tag="ul"
+              :value="list"
+              v-bind="dragOptions"
+              :move="onMove"
+              @start="isDragging=true"
+              @end="isDragging=false"
+            >
+              <transition-group type="transition" :name="'flip-list'">
+                <li
+                  class="list-group-item shadow-lg p-3 bg-white rounded"
                   v-for="element in list"
-                  :key="element.id">
+                  :key="element.order"
+                >
+                  <i
+                    :class="element.fixed? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'"
+                    @click=" element.fixed=! element.fixed"
+                    aria-hidden="true"
+                  ></i>
                   {{element.name}}
-                  <span class="badge">{{element.order}}</span>
-                  </div>
-                  
-                  
+                  <span
+                    class="badge badge-secondary"
+                  >{{element.order}}</span>
+                </li>
+              </transition-group>
             </draggable>
           </div>
         </div>
@@ -29,15 +44,24 @@
             <b>List-2</b>
           </div>
           <div class="card-body">
-            <draggable class="list-group" :list="list2" group="my-group" @change="log">
-                <div
+            <draggable element="span" :value="list2" v-bind="dragOptions" :move="onMove" 
+              @start="isDragging=true"
+              @end="isDragging=false">
+              <transition-group name="no" class="list-group" tag="ul">
+                <li
                   class="list-group-item shadow-lg p-3 bg-white rounded"
                   v-for="element in list2"
-                  :key="element.id"
+                  :key="element.order"
                 >
+                  <i
+                    :class="element.fixed? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'"
+                    @click=" element.fixed=! element.fixed"
+                    aria-hidden="true"
+                  ></i>
                   {{element.name}}
                   <span class="badge">{{element.order}}</span>
-                </div>
+                </li>
+              </transition-group>
             </draggable>
           </div>
         </div>
@@ -101,9 +125,6 @@ export default {
       return (
         (!relatedElement || !relatedElement.fixed) && !draggedElement.fixed
       );
-    },
-    log: function(evt) {
-      window.console.log(evt);
     }
   },
   computed: {

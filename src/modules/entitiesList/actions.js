@@ -11,6 +11,6 @@ export async function fetchList({ commit }) {
     } catch (e) {
         commit('treeError', e.message)
     } finally {
-        console.log('Get Tree OK.')
+        console.log('fetchList OK.')
     }
 }

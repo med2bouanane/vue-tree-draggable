@@ -24,6 +24,7 @@ export default {
   //   },
   mounted() {
     this.fetchTree();
+    this.fetchList();
   },
   computed: {
     ...mapState("tree", ["tree"]),
