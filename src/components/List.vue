@@ -9,7 +9,7 @@
           <div class="card-body">
             <draggable
               class="list-group"
-              :list="list" group="my-group" @change="log">
+              :list="listSrc" group="my-group" @change="log">
                 <div class="list-group-item shadow-lg p-3 bg-white rounded"
                   v-for="element in list"
                   :key="element.id">
@@ -29,7 +29,7 @@
             <b>List-2</b>
           </div>
           <div class="card-body">
-            <draggable class="list-group" :list="list2" group="my-group" @change="log">
+            <draggable class="list-group" :list="listDest" group="my-group" @change="log">
                 <div
                   class="list-group-item shadow-lg p-3 bg-white rounded"
                   v-for="element in list2"
@@ -71,15 +71,18 @@ export default {
   components: {
     draggable
   },
+  props:{
+    listSrc:{
+      type: Array,
+      required: true
+    },
+    listDest:{
+      type: Array,
+      required: true
+    }    
+  },
   data() {
     return {
-      // list:[],
-      // list: message.map((name, index) => {
-      //   return { name, order: index + 1, fixed: false };
-      // }),
-      // list2: [{name:"dadffa",fixed:false, order:5}],
-      // list:[],
-      // list2:[],
       editable: true,
       isDragging: false,
       delayedDragging: false

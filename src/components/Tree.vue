@@ -8,23 +8,18 @@
       :contextItems="tree.contextItems"
       @contextSelected="contextSelected"
     ></v-treeview>
-    <button type="button" @click="contextSelected">ADD</button>
+    <!-- <button type="button" @click="contextSelected">ADD</button> -->
   </div>
 </template>
 
 
 <script>
-import { mapGetters, mapActions, mapState } from "vuex";
+import { mapGetters, mapActions, mapState, mapMutations } from "vuex";
 import VTreeview from "v-treeview";
 export default {
-  //   data() {
-  //     return {
-  //       tree: null
-  //     };
-  //   },
   mounted() {
-    this.fetchTree();
-    this.fetchList();
+    // this.fetchTree();
+    // this.fetchList();
   },
   computed: {
     ...mapState("tree", ["tree"]),
@@ -33,6 +28,7 @@ export default {
   methods: {
     ...mapActions("tree", ["fetchTree"]),
     ...mapActions("entitiesList", ["fetchList"]),
+    ...mapMutations("entitiesList", ["setList"]),
     getTypeRule(type) {
       var typeRule = this.tree.treeTypes.filter(t => t.type == type)[0];
       return typeRule;
@@ -76,7 +72,8 @@ export default {
       var typeRule = this.getTypeRule(this.selectedNode.model.type);
       console.log("ROOT===>",typeRule.type);
       if(typeRule.type === "ROOT"){
-      this.fetchList();
+      // this.fetchList();
+      this.setList(this.list,this.list2);
       }
       typeRule.valid_children.map(function(type, key) {
         var childType = this.getTypeRule(type);

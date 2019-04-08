@@ -5,7 +5,8 @@ export async function fetchList({ commit }) {
         const { data } = await Vue.axios({
             url: '/list'
         })
-        commit('entitiesList/setList', data, { root: true })
+        const payload = { list: data, list2: [] };
+        commit('entitiesList/setList', payload, { root: true })
         console.log('LIST ------->', data);
         return data;
     } catch (e) {

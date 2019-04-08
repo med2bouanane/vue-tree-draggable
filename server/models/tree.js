@@ -1,5 +1,5 @@
 const tree = {
-    openAll: true,
+    openAll: false,
     treeTypes: [{
             type: "#",
             max_children: 6,
