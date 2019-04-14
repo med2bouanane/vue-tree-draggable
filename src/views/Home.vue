@@ -15,7 +15,7 @@ import { mapGetters, mapActions, mapState } from "vuex";
 import Tree from "@/components/Tree";
 import List from "@/components/List";
 export default {
-  mounted() {
+  created() {
     this.fetchTree();
     this.fetchList();
   },

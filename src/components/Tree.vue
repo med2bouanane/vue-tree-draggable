@@ -1,12 +1,13 @@
 <template>
   <div>
     <v-treeview
-      v-model="tree.treeData"
-      :treeTypes="tree.treeTypes"
+      v-model="treeComponent.treeData"
+      :treeTypes="treeComponent.treeTypes"
       @selected="selected"
-      :openAll="tree.openAll"
-      :contextItems="tree.contextItems"
+      :openAll="true"
+      :contextItems="treeComponent.contextItems"
       @contextSelected="contextSelected"
+      @openTree="openTree"
     ></v-treeview>
     <!-- <button type="button" @click="contextSelected">ADD</button> -->
   </div>
@@ -17,20 +18,29 @@
 import { mapGetters, mapActions, mapState, mapMutations } from "vuex";
 import VTreeview from "v-treeview";
 export default {
+  data(){
+    return{
+    open:false
+    }
+  },
   mounted() {
     // this.fetchTree();
     // this.fetchList();
   },
   computed: {
-    ...mapState("tree", ["tree"]),
+    ...mapState("tree", ["tree","treeComponent"]),
     ...mapState("entitiesList", ["list", "list2"])
   },
   methods: {
     ...mapActions("tree", ["fetchTree"]),
-    ...mapActions("entitiesList", ["fetchList"]),
+    ...mapActions("entitiesList", ["fetchList","updateLists"]),
     ...mapMutations("entitiesList", ["setList"]),
+    openTree(node){
+      console.log('--------------------',node);
+      this.open = false;
+    },
     getTypeRule(type) {
-      var typeRule = this.tree.treeTypes.filter(t => t.type == type)[0];
+      var typeRule = this.treeComponent.treeTypes.filter(t => t.type == type)[0];
       return typeRule;
     },
     contextSelected(command) {
@@ -66,15 +76,27 @@ export default {
       }
     },
     selected(node) {
+      let obj = {};
+      node.open = true;
+      console.log('--------------------NODE',node);
       this.selectedNode = node;
       //   this.selectedNode.icon = "fas fa-folder-open"
       this.contextItems = [];
       var typeRule = this.getTypeRule(this.selectedNode.model.type);
       console.log("ROOT===>",typeRule.type);
       if(typeRule.type === "ROOT"){
-      // this.fetchList();
-      this.setList(this.list,this.list2);
+      obj = {id:node.$vnode.data.key,type:"BATCH"};
+      this.updateLists(obj);
+      }else if(typeRule.type === "BATCH"){
+      obj = {id:node.$vnode.data.key,type:"ENV"};
+      this.updateLists(obj);
+      }else if(typeRule.type === "ENV"){
+      obj = {id:node.$vnode.data.key,type:"DOC"};
+      this.updateLists(obj);
       }
+
+
+
       typeRule.valid_children.map(function(type, key) {
         var childType = this.getTypeRule(type);
         var item = {
@@ -99,9 +121,19 @@ export default {
 ul .tree-node input[type="radio"] + label:before {
   background: transparent !important;
 }
-svg {
+/* svg {
+  width: 50px !important;
+  height: 25px !important;
+} */
+
+.tree-icon{
   width: 50px !important;
   height: 25px !important;
 }
+
+.toggle-icon{
+  display: none !important;
+}
+
 </style>
 

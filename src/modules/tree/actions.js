@@ -3,10 +3,24 @@ import axios from 'axios';
 import _ from "lodash";
 
 
-export async function fetchTree({ commit }) {
+export function updateTreeList(context, payload) {
     try {
-        let { data } = await axios.get('/tree')
-        commit('tree/setTree', data, { root: true })
+        payload.rootState = context.rootState;
+        context.commit('tree/updateTreeList', payload, { root: true })
+
+    } catch (e) {
+        console.log('fetchList ERROR.')
+    } finally {
+        console.log('fetchList OK.')
+    }
+}
+
+
+export async function fetchTree(context) {
+    try {
+        let { data } = await axios.get('/tree2')
+        const payload = { data: data, rootState: context.rootState };
+        context.commit('tree/setTree', payload, { root: true })
             // const reghtList = await getList(data);
         console.log('tree------->', data);
         // console.log('reghtList------->', reghtList);

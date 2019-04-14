@@ -9,11 +9,11 @@
           <div class="card-body">
             <draggable
               class="list-group"
-              :list="listSrc" group="my-group" @change="log">
+              :list="listSrc" group="my-group" @change="log" @end="updateTree">
                 <div class="list-group-item shadow-lg p-3 bg-white rounded"
                   v-for="element in list"
                   :key="element.id">
-                  {{element.name}}
+                  {{element.label}}
                   <span class="badge">{{element.order}}</span>
                   </div>
                   
@@ -29,13 +29,13 @@
             <b>List-2</b>
           </div>
           <div class="card-body">
-            <draggable class="list-group" :list="listDest" group="my-group" @change="log">
+            <draggable class="list-group" :list="listDest" group="my-group" @change="log" @end="updateTree">
                 <div
                   class="list-group-item shadow-lg p-3 bg-white rounded"
                   v-for="element in list2"
                   :key="element.id"
                 >
-                  {{element.name}}
+                  {{element.label}}
                   <span class="badge">{{element.order}}</span>
                 </div>
             </draggable>
@@ -93,6 +93,8 @@ export default {
   },
   methods: {
     // ...mapActions("entitiesList", ["fetchList"]),
+
+    ...mapActions("tree", ["updateTreeList"]),
     orderList() {
       this.list = this.list.sort((one, two) => {
         return one.order - two.order;
@@ -106,7 +108,14 @@ export default {
       );
     },
     log: function(evt) {
-      window.console.log(evt);
+      if(evt.added){
+      window.console.log('changed',evt.added.element.id);
+      this.updateTreeList({id:evt.added.element.id});
+      }
+    },
+    updateTree(evt){
+      console.log('updateTree',this.list2[evt.item.newIndex]);
+      // this.updateTreeList(obj);
     }
   },
   computed: {

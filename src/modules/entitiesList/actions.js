@@ -15,3 +15,14 @@ export async function fetchList({ commit }) {
         console.log('fetchList OK.')
     }
 }
+
+export function updateLists(context, payload) {
+    try {
+        payload.rootState = context.rootState;
+        context.commit('entitiesList/updateLists', payload, { root: true })
+    } catch (e) {
+        console.log('fetchList ERROR.')
+    } finally {
+        console.log('fetchList OK.')
+    }
+}

@@ -13,22 +13,22 @@ const tree = {
         },
         {
             type: "ROOT",
-            icon: "fas fa-sitemap",
+            icon: "fas fa-sitemap fa-lg",
             valid_children: ["BATCH", "ENV", "DOC"]
         },
         {
             type: "BATCH",
-            icon: "fas fa-inbox",
+            icon: "fas fa-inbox fa-lg",
             valid_children: ["ENV", "DOC"]
         },
         {
             type: "ENV",
-            icon: "fas fa-folder",
+            icon: "fas fa-folder fa-lg",
             valid_children: ["DOC"]
         },
         {
             type: "DOC",
-            icon: "fas fa-file-alt",
+            icon: "fas fa-file-alt fa-lg",
             valid_children: []
         }
     ],

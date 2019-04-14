@@ -1,4 +1,18 @@
 # vue-tree-draggable
+```
+ -1- dependecie --> @fortawesome/fontawesome-free
+ -2- main.js --> import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css'
+ -3- modules-treeData --> fa-lg
+ .tree-icon{
+  width: 50px !important;
+  height: 25px !important;
+}
+.toggle-icon{
+  display: none !important;
+}
+
+ -4- tree -> mutations
+```
 
 ## Project setup
 ```
