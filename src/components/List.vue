@@ -5,16 +5,22 @@
     </div>
     <div class="card-body">
       <div class="fluid container">
-        <!-- <div class="row">
-          <div class="col-md-6">
-            <Workflow class="mb-5" :options="['Vue.js','React']"></Workflow>
+        <div class="card" v-if="showWF">
+          <div class="card-body bg-warning">
+            <div class="row">
+              <div class="col-md-6">
+                <label>wf:</label>
+                <Workflow :options="['Vue.js','React']" @input="setSelected"></Workflow>
+              </div>
+              <div class="col-md-6" v-if="showList">
+                <label>tray:</label>
+                <Workflow :options="['Vue.js-2','React-2']"></Workflow>
+              </div>
+            </div>
           </div>
-          <div class="col-md-6">
-            <Workflow class="mb-5" :options="['Vue.js-2','React-2']"></Workflow>
-          </div>
-        </div> -->
+        </div>
         <div class="row">
-          <div class="col-md-6 overflow-auto"  style="max-height:500px;">
+          <div class="col-md-6 overflow-auto" style="max-height:500px;">
             <div class="card shadow-lg p-3 bg-white rounded">
               <div class="card-header text-white bg-primary">
                 <b>List-1</b>
@@ -26,6 +32,7 @@
                   group="my-group"
                   @change="log"
                   @end="updateTree"
+                  @click="show"
                 >
                   <div
                     class="list-group-item shadow-lg p-3 bg-white rounded"
@@ -50,7 +57,6 @@
                   class="list-group"
                   :list="listDest"
                   group="my-group"
-                  @change="log"
                   @end="updateTree"
                 >
                   <div
@@ -112,7 +118,9 @@ export default {
     return {
       editable: true,
       isDragging: false,
-      delayedDragging: false
+      delayedDragging: false,
+      showWF: false,
+      showList: false
     };
   },
   mounted() {
@@ -135,14 +143,27 @@ export default {
       );
     },
     log: function(evt) {
-      if (evt.added) {
-        window.console.log("changed", evt.added.element.id);
-        this.updateTreeList({ id: evt.added.element.id });
-      }
+      console.log('-------',this.showWF);
+      this.showWF = !this.showWF;
+      console.log('-------',this.showWF);
+      // if (evt.added) {
+      //   window.console.log("changed", evt.added.element.id);
+      //   this.updateTreeList({ id: evt.added.element.id });
+      // }
     },
     updateTree(evt) {
       console.log("updateTree", this.list2[evt.item.newIndex]);
       // this.updateTreeList(obj);
+    },
+    show(){
+      console.log('-----------------');
+      this.showWF = !showWF;
+    },
+    setSelected(value){
+      console.log('-------',value);
+      console.log('-------',this.showList);
+      this.showList = !this.showList;
+      console.log('-------',this.showList);
     }
   },
   computed: {

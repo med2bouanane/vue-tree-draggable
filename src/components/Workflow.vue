@@ -1,5 +1,5 @@
 <template>
-    <v-select :options="options"></v-select>
+    <v-select :options="options" @input="$emit('input')"></v-select>
 </template>
 
 <script>
