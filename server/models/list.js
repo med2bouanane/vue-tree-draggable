@@ -1,25 +1,72 @@
 module.exports = [{
-        name: "item-1",
-        fixed: false,
-        order: 1,
-        id: 1
-    },
-    {
-        name: "item-2",
-        fixed: false,
-        order: 2,
-        id: 2
-    },
-    {
-        name: "item-3",
-        fixed: false,
-        order: 3,
-        id: 3
-    },
-    {
-        name: "item-4",
-        fixed: false,
-        order: 4,
-        id: 4
-    }
+  name: 'item-1',
+  fixed: false,
+  order: 1,
+  id: 1,
+},
+{
+  name: 'item-2',
+  fixed: false,
+  order: 2,
+  id: 2,
+},
+{
+  name: 'item-3',
+  fixed: false,
+  order: 3,
+  id: 3,
+},
+{
+  name: 'item-4',
+  fixed: false,
+  order: 4,
+  id: 4,
+},
+{
+  name: 'item-5',
+  fixed: false,
+  order: 5,
+  id: 5,
+},
+{
+  name: 'item-6',
+  fixed: false,
+  order: 6,
+  id: 6,
+},
+{
+  name: 'item-7',
+  fixed: false,
+  order: 7,
+  id: 7,
+},
+{
+  name: 'item-8',
+  fixed: false,
+  order: 8,
+  id: 8,
+}, {
+  name: 'item-9',
+  fixed: false,
+  order: 9,
+  id: 9,
+},
+{
+  name: 'item-10',
+  fixed: false,
+  order: 10,
+  id: 10,
+},
+{
+  name: 'item-11',
+  fixed: false,
+  order: 11,
+  id: 11,
+},
+{
+  name: 'item-12',
+  fixed: false,
+  order: 12,
+  id: 12,
+},
 ];

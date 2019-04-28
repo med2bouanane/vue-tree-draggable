@@ -1,10 +1,12 @@
 <template>
   <div class="container">
     <div class="row">
-      <tree></tree>
-    </div>
-    <div class="row mt-5">
-      <list :listSrc="list" :listDest="list2"></list>
+      <div class="col-md-3">
+        <tree></tree>
+      </div>
+      <div class="col-md-9">
+        <list :listSrc="list" :listDest="list2"></list>
+      </div>
     </div>
   </div>
 </template>
@@ -26,7 +28,7 @@ export default {
   methods: {
     ...mapActions("tree", ["fetchTree"]),
     ...mapActions("entitiesList", ["fetchList"])
-    },
+  },
   components: {
     Tree,
     List

@@ -1,60 +1,86 @@
 <template>
-  <div class="fluid container">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="card shadow-lg p-3 mb-5 bg-white rounded">
-          <div class="card-header text-white bg-primary">
-            <b>List-1</b>
+  <div class="card shadow-lg p-3 bg-white rounded">
+    <div class="card-header text-white bg-primary">
+      <b>Corbeille Classification</b>
+    </div>
+    <div class="card-body">
+      <div class="fluid container">
+        <!-- <div class="row">
+          <div class="col-md-6">
+            <Workflow class="mb-5" :options="['Vue.js','React']"></Workflow>
           </div>
-          <div class="card-body">
-            <draggable
-              class="list-group"
-              :list="listSrc" group="my-group" @change="log" @end="updateTree">
-                <div class="list-group-item shadow-lg p-3 bg-white rounded"
-                  v-for="element in list"
-                  :key="element.id">
-                  {{element.label}}
-                  <span class="badge">{{element.order}}</span>
-                  </div>
-                  
-                  
-            </draggable>
+          <div class="col-md-6">
+            <Workflow class="mb-5" :options="['Vue.js-2','React-2']"></Workflow>
           </div>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="card shadow-lg p-3 mb-5 bg-white rounded">
-          <div class="card-header text-white bg-primary">
-            <b>List-2</b>
-          </div>
-          <div class="card-body">
-            <draggable class="list-group" :list="listDest" group="my-group" @change="log" @end="updateTree">
-                <div
-                  class="list-group-item shadow-lg p-3 bg-white rounded"
-                  v-for="element in list2"
-                  :key="element.id"
+        </div> -->
+        <div class="row">
+          <div class="col-md-6 overflow-auto"  style="max-height:500px;">
+            <div class="card shadow-lg p-3 bg-white rounded">
+              <div class="card-header text-white bg-primary">
+                <b>List-1</b>
+              </div>
+              <div class="card-body">
+                <draggable
+                  class="list-group"
+                  :list="listSrc"
+                  group="my-group"
+                  @change="log"
+                  @end="updateTree"
                 >
-                  {{element.label}}
-                  <span class="badge">{{element.order}}</span>
-                </div>
-            </draggable>
+                  <div
+                    class="list-group-item shadow-lg p-3 bg-white rounded"
+                    v-for="element in list"
+                    :key="element.id"
+                  >
+                    {{element.label}}
+                    <span class="badge">{{element.order}}</span>
+                  </div>
+                </draggable>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <!-- <div class="list-group col-md-3">
+          <div class="col-md-6">
+            <div class="card shadow-lg p-3 bg-white rounded">
+              <div class="card-header text-white bg-primary">
+                <b>List-2</b>
+              </div>
+              <div class="card-body">
+                <draggable
+                  class="list-group"
+                  :list="listDest"
+                  group="my-group"
+                  @change="log"
+                  @end="updateTree"
+                >
+                  <div
+                    class="list-group-item shadow-lg p-3 bg-white rounded"
+                    v-for="element in list2"
+                    :key="element.id"
+                  >
+                    {{element.label}}
+                    <span class="badge">{{element.order}}</span>
+                  </div>
+                </draggable>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="list-group col-md-3">
       <pre>{{listString}}</pre>
     </div>
     <div class="list-group col-md-3">
       <pre>{{list2String}}</pre>
-      </div>-->
+          </div>-->
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import draggable from "vuedraggable";
+import Workflow from "@/components/Workflow";
 import { mapGetters, mapActions, mapState } from "vuex";
 const message = [
   "vue.draggable",
@@ -69,17 +95,18 @@ const message = [
 export default {
   name: "hello",
   components: {
-    draggable
+    draggable,
+    Workflow
   },
-  props:{
-    listSrc:{
+  props: {
+    listSrc: {
       type: Array,
       required: true
     },
-    listDest:{
+    listDest: {
       type: Array,
       required: true
-    }    
+    }
   },
   data() {
     return {
@@ -108,13 +135,13 @@ export default {
       );
     },
     log: function(evt) {
-      if(evt.added){
-      window.console.log('changed',evt.added.element.id);
-      this.updateTreeList({id:evt.added.element.id});
+      if (evt.added) {
+        window.console.log("changed", evt.added.element.id);
+        this.updateTreeList({ id: evt.added.element.id });
       }
     },
-    updateTree(evt){
-      console.log('updateTree',this.list2[evt.item.newIndex]);
+    updateTree(evt) {
+      console.log("updateTree", this.list2[evt.item.newIndex]);
       // this.updateTreeList(obj);
     }
   },
@@ -166,12 +193,12 @@ export default {
 .list-group-item {
   cursor: move;
   margin-bottom: 10px !important;
-  border-left: 5px solid #66BB6A !important;
+  border-left: 5px solid #66bb6a !important;
   /**/
 }
 .list-group-item:hover {
   opacity: 0.7;
-  background-color: #FAFAFA !important; 
+  background-color: #fafafa !important;
 }
 .list-group-item i {
   cursor: pointer;
