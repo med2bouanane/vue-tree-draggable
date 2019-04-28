@@ -6,7 +6,7 @@
     <div class="card-body">
       <div class="fluid container">
         <div class="card" v-if="showWF">
-          <div class="card-body bg-warning">
+          <div class="card-body bg-gradient-warning">
             <div class="row">
               <div class="col-md-6">
                 <label>wf:</label>
@@ -197,7 +197,10 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+// @import 'assets/custom.scss';
+@import 'node_modules/bootstrap/scss/bootstrap.scss';
+$enable-gradients: true;
 .flip-list-move {
   transition: transform 0.5s;
 }
