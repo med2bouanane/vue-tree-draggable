@@ -5,6 +5,9 @@
     </div>
     <div class="card-body">
       <div class="fluid container">
+    <!-- <transition name="fade" > -->
+    <transition name="slide-fade">
+    <!-- <transition name="bounce">   -->
         <div class="card" v-if="showWF">
           <div class="card-body bg-gradient-warning">
             <div class="row">
@@ -12,13 +15,17 @@
                 <label>wf:</label>
                 <Workflow :options="['Vue.js','React']" @input="setSelected"></Workflow>
               </div>
+              <transition name="slide-fade" >
               <div class="col-md-6" v-if="showList">
                 <label>tray:</label>
                 <Workflow :options="['Vue.js-2','React-2']"></Workflow>
               </div>
+              </transition>
             </div>
           </div>
         </div>
+        </transition>
+      </div>
         <div class="row">
           <div class="col-md-6 overflow-auto" style="max-height:500px;">
             <div class="card shadow-lg p-3 bg-white rounded">
@@ -226,5 +233,45 @@ $enable-gradients: true;
 }
 .list-group-item i {
   cursor: pointer;
+}
+/*FADE*/
+.fade-enter-active{
+  transition: opacity 1.5s;
+}
+.fade-leave-active{
+  transition: opacity .5s;
+} 
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+/*slide-fade*/
+.slide-fade-enter-active {
+  transition: all 1.5s ease;
+}
+.slide-fade-leave-active {
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to{
+  transform: translateX(20px);
+  opacity: 0;
+}
+/*bounce*/
+.bounce-enter-active {
+  animation: bounce-in .5s;
+}
+.bounce-leave-active {
+  animation: bounce-in .5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>
