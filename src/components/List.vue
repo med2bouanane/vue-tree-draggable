@@ -1,5 +1,5 @@
 <template>
-  <div class="card shadow-lg p-3 bg-white rounded">
+  <div class="card shadow-lg p-3 bg-white rounded" id="myid">
     <div class="card-header text-white bg-primary">
       <b>Corbeille Classification</b>
     </div>
